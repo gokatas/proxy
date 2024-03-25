@@ -1,5 +1,5 @@
 // Proxy mediates TCP traffic between a client and an upstream server. Adapted from
-// youtu.be/J4J-A9tcjcA.
+// http://youtu.be/J4J-A9tcjcA.
 package main
 
 import (
@@ -32,8 +32,7 @@ func proxy(conn net.Conn) {
 		log.Print(err)
 		return
 	}
-	defer upstream.Close()
 
-	go io.Copy(upstream, conn) // here it's ok not to track the goroutine
+	go io.Copy(upstream, conn) // in this case it's ok not to track the goroutine
 	io.Copy(conn, upstream)
 }
